@@ -1,6 +1,7 @@
 # Utilizing a Graph Neural Network (GNN) with Deep Q-Learning to Solve Dots and Boxes
 
 **Abstract**
+
 Many people are using popular algorithms such as Alpha Beta and Monte Carlo Tree Search to play common games such as Othello or Tic-Tac-Toe. As such, finding the best method to play these is games is always on the forefront of this field. In this paper, we are trying to play Dots and Boxes, a deterministic game that involves players drawing lines on a grid in order to complete boxes. However, the state space of Dots and Boxes increases exponentially, which makes algorithms such as Alpha Beta or Monte Carlo Tree Search have to do significantly more computation. Here, the main objective is to train a model to play the game with high proficiency and suffers less from the increase in board size.
 To resolve this, we utilized a GNN in combination with Deep Q-Learning to try and reduce the time to find an optimal move. Through experimentation, the model achieved an win rate average of 81% across all experiments, and an average of 68.49% boxes captured, with the best performance against the heuristic model on a 5x5 board. It also achieved a superior time complexity, where increasing the board size had a negligible effect on the time to compute the best move. Additionally, the models performance is inversely proportional to the board size. Ultimately, this paper demonstrates that combining a GNN with Deep-Q Learning is a greatly viable solution for combinatorial games that can be represented as graphs.
 
