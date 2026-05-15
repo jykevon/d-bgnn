@@ -55,7 +55,7 @@ def playGames(m, n, numOfGames):
         players = ['p1', 'p2']
         boxes = {'p1': [], 'p2': []}
         turn = 0
-        model = keras.models.load_model('4x40.99gammanew.keras', custom_objects={"GNNLayer": GNNLayer})
+        model = keras.models.load_model('model.keras', custom_objects={"GNNLayer": GNNLayer})
         adjMat = np.array(initialzeBoard(n, m)[2], dtype=np.float32)
 
         while findMoves():
@@ -313,7 +313,7 @@ def trainAgent(episodes, n, m, adjMat, nodeFeatMat): # from Hugging Face
             target_model.set_weights(model.get_weights())
         print(f"Episode {ep} done, Epsilon: {round(epsilon, 2)}")
             
-    model.save("dots_and_boxes_gnn.keras")
+    model.save("model.keras")
 
 def step(action, n, m):
     global TAKEN, OWNERS
