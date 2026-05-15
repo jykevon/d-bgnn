@@ -6,6 +6,6 @@ To resolve this, we utilized a GNN in combination with Deep Q-Learning to try an
 
 To install required dependancies:
 ```pip install tensorflow keras numpy```
-**
-How to use the program**
+
+**How to use the program**
 You can decided whether you want to train a new GNN, play games, or both by commenting or uncommenting their respective methods in the main method. Additionally, you can see a visual representation of the games by uncommenting `printBoard()` call in the `playGames()` method. To see the model the model plays, you can uncomment the print statement to the terminal printing the line number the model played. In order to avoid changing the current version of the GNN, you can rename the file for the model saved during training. Also, you can choose which model you use in the play moves method and the opponent model by uncommenting the certain model you can to play against and commenting the others.
