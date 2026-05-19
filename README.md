@@ -44,16 +44,12 @@ I implemented the Deep Q-Learning Algorithm from [Hugging Face](https://huggingf
 **Playing Games**
 
 I allowed input from the size of the board and number of games the user wants to play. For every game, reset the relevant data structures and create data structures to store the data you want to collect. Load the GNN you want to use and implement whatever models you would like the model to play against and allow each player to choose moves, which updates the relevent data stuctures. If you would like, print a string representation of the board after each move. If a model ever completes a box, allow them to go again. Once the board has been filled, find which model won by counting the number of boxes each player has then print the statistics from the game. At the end, you should have a sum of stats from all the games combined. Here is the string representation I chose to use where `x` is player 1 and `o` is player 2:
-`.---.   .   .`
-
-`| o |   |    `
-
-`.---.---.---.`
-
-`| o | x |    `
-
-`.---.---.---.`
-
-`| x |   |    `
-
-`.---.   .---.`
+```
+.---.   .   .
+| o |   |    
+.---.---.---.
+| o | x |    
+.---.---.---.
+| x |   |    
+.---.   .---.
+```
