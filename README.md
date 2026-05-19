@@ -33,6 +33,10 @@ Returns a random move from the possible moves
 
 While all the boxes in the game have a valence of greater than 1, pick a random move that doesn't make a box with a valence of one. Otherwise, pick a random move.
 
+**Alpha Beta Pruning Model**
+
+The model was implemented from the code from [GeeksForGeeks](https://www.geeksforgeeks.org/artificial-intelligence/alpha-beta-pruning-in-adversarial-search-algorithms/). Simply copy the code and change the data structures. The node used in the project is (TAKEN, OWNERS). So the children of that node are found by playing different moves on that game state. This is then used to find the most optimal move in the algorithm. To improve the winrate of Alpha Beta, it is best to include randomness which can be done by running Alpha Beta multiple times to find moves with the same score, and play a randomly selected move from that set, which is what what was used in this project.
+
 **Graph Neural Network**
 
 The custom 2-layer spectral convolutional graph neural network has 64 hidden usits and uses ReLU as the activation function. For the message passing function, it is calculated as such: H = σ(A x N x W) where A is the adjacency matrix, N is the node feature matrix, and W is the weights supplied by `Keras.Dense`. The GNN has 64 hidden units, which is then condensed into 1 unit, which represents the q-value for a certain action. I chose to use the Adam optimizer with loss set to mean squared error. When building the model, you must use `None` as the first element of the shape node feature matrix input and the number of features for the second element, and both `None` for the shape adjacency matrix input so that it can play boards of different sizes.
