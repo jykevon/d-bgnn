@@ -18,14 +18,36 @@ You can decided whether you want to train a new GNN, play games, or both by comm
 `TAKEN`: a list of the taken edges
 `OWNERS`: a dictionary that maps the box index to the player that owns the box
 `BOXES`: a dictionary that maps box index to the indicies of the lines that make the box
+`adjMat`: the adjacency matrix that shows connections between lines if they share a box
+`nodeFeatMat`: the node feature matrix, which shows the game state. the first column indicates if that line has been drawn and the second column indicates if the line is on the perimeter of the grid.
 
-**Possible moves**\n
+**Possible moves**
+
 This can be easily calculated from the set of total edges minus the set of taken edges
 
-**Random Model**\n
+**Random Model**
+
 Returns a random move from the possible moves
 
-**Heuristic Model**\n
+**Heuristic Model**
+
 While all the boxes in the game have a valence of greater than 1, pick a random move that doesn't make a box with a valence of one. Otherwise, pick a random move.
 
+**Graph Neural Network**
 
+The custom 2-layer spectral convolutional graph neural network has 64 hidden usits and uses ReLU as the activation function. For the message passing function, it is calculated as such: H = σ(A x N x W) where A is the adjacency matrix, N is the node feature matrix, and W is the weights supplied by `Keras.Dense`. The GNN has 64 hidden units, which is then condensed into 1 unit, which represents the q-value for a certain action. I chose to use the Adam optimizer with loss set to mean squared error. When building the model, you must use `None` as the first element of the shape node feature matrix input and the number of features for the second element, and both `None` for the shape adjacency matrix input so that it can play boards of different sizes.
+
+**Training the Deep Q-Learning Model**
+
+I implemented the Deep Q-Learning Algorithm from [Hugging Face](https://huggingface.co/learn/deep-rl-course/unit3/deep-q-algorithm). The main premise is to use normal Q-Learning but use a GNN to approximate the q-values. I used a deque from the collections library from Python. Each episode plays a singular game, where the action-value model utilizes an epsilon greedy strategy to play moves against the same action-value model without the epsilon greedy strategy and simulates the opponents reaction after what our model chose and generates a reward value. The reward calculation is +1 for every box our model maxes and -1 for every box the opponent model makes and illegal moves have a value of -1e9 to prevent the model making illegal moves. Then this is used to find the q-values for each of the interactions in the replay memory sample. The replay memory is then later sampled to train another model on creating a good target for q-values. Every 10 episodes the target action-value model's weights is set to the action-value model's weights. At the very end, the action-value model is saved.
+
+**Playing Games**
+
+I allowed input from the size of the board and number of games the user wants to play. For every game, reset the relevant data structures and create data structures to store the data you want to collect. Load the GNN you want to use and implement whatever models you would like the model to play against and allow each player to choose moves, which updates the relevent data stuctures. If you would like, print a string representation of the board after each move. If a model ever completes a box, allow them to go again. Once the board has been filled, find which model won by counting the number of boxes each player has then print the statistics from the game. At the end, you should have a sum of stats from all the games combined. Here is the string representation I chose to use where `x` is player 1 and `o` is player 2:
+`.---.   .   .
+| o |   |    
+.---.---.---.
+| o | x |    
+.---.---.---.
+| x |   |    
+.---.   .---.`
