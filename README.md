@@ -19,13 +19,13 @@ You can decided whether you want to train a new GNN, play games, or both by comm
 `OWNERS`: a dictionary that maps the box index to the player that owns the box
 `BOXES`: a dictionary that maps box index to the indicies of the lines that make the box
 
-**Possible moves**
+**Possible moves**\n
 This can be easily calculated from the set of total edges minus the set of taken edges
 
-**Random Model**
+**Random Model**\n
 Returns a random move from the possible moves
 
-**Heuristic Model**
+**Heuristic Model**\n
 While all the boxes in the game have a valence of greater than 1, pick a random move that doesn't make a box with a valence of one. Otherwise, pick a random move.
 
 
