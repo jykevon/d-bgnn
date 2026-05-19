@@ -11,3 +11,21 @@ To install required dependancies:
 **How to use the program**
 
 You can decided whether you want to train a new GNN, play games, or both by commenting or uncommenting their respective methods in the main method. Additionally, you can see a visual representation of the games by uncommenting `printBoard()` call in the `playGames()` method. To see the model the model plays, you can uncomment the print statement to the terminal printing the line number the model played. In order to avoid changing the current version of the GNN, you can rename the file for the model saved during training. Also, you can choose which model you use in the play moves method and the opponent model by uncommenting the certain model you can to play against and commenting the others.
+
+**Data Structrures**
+`BOARD`: a dictionary that maps an edge to every box it is connected to
+`EDGES`: a set of the edges (0 to the number of edges - 1)
+`TAKEN`: a list of the taken edges
+`OWNERS`: a dictionary that maps the box index to the player that owns the box
+`BOXES`: a dictionary that maps box index to the indicies of the lines that make the box
+
+**Possible moves**
+This can be easily calculated from the set of total edges minus the set of taken edges
+
+**Random Model**
+Returns a random move from the possible moves
+
+**Heuristic Model**
+While all the boxes in the game have a valence of greater than 1, pick a random move that doesn't make a box with a valence of one. Otherwise, pick a random move.
+
+
